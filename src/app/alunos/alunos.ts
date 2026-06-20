@@ -6,35 +6,49 @@ import { Student, StudentService } from '../services/student.service';
     selector: 'app-alunos',
     imports: [RouterLink],
     template: `
-    <section>
-      <h1>Alunos</h1>
-      <button routerLink="/alunos/criar">Criar novo aluno</button>
-      <button type="button" (click)="recarregar()">Recarregar</button>
+    <div class="m-3">
+      <h1 class="text-3xl font-bold mb-3">Alunos</h1>
+
+      <div class="flex gap-2 mb-3">
+        <button class="btn" routerLink="/alunos/criar">Criar novo aluno</button>
+        <button class="btn" (click)="recarregar()">Recarregar</button>
+      </div>
+      
 
       @if (loading()) {
-        <p>Carregando...</p>
+        <span class="loading loading-dots loading-xl"></span>
       }
 
       @if (error()) {
-        <p>{{ error() }}</p>
+        <p class="text-red-500">{{ error() }}</p>
       }
 
       @if (!loading() && students().length === 0) {
-        <p>Nenhum aluno encontrado.</p>
+        <p class="text-gray-500">Nenhum aluno encontrado.</p>
       }
 
       @if (!loading() && students().length > 0) {
-        <ul>
-          @for (student of students(); track student._id) {
-            <li>
-              <strong>{{ student.nome }}</strong> - {{ student.idade }} anos - {{ student.curso }}
-              <button [routerLink]="['/alunos', student._id, 'editar']">Editar</button>
-              <button type="button" (click)="excluir(student._id)">Excluir</button>
-            </li>
-          }
+        <ul class="list bg-base-100 rounded-box shadow-md">
+            <li class="p-4 pb-2 text-xs opacity-60 tracking-wide">Alunos cadastrados</li>
+  
+            @for (student of students(); track student._id) {
+                <li class="list-row">
+                    <div class="list-col-grow">
+                        <div>{{ student.nome }} ({{ student.idade }} anos)</div>
+                        <div class="text-xs uppercase font-semibold opacity-60">{{ student.curso }}</div>
+                    </div>
+            
+                    <button class="btn btn-primary" [routerLink]="['/alunos', student._id, 'editar']">
+                        Editar
+                    </button>
+                    <button class="btn btn-error" type="button" (click)="excluir(student._id)">
+                        Excluir
+                    </button>
+                </li>
+            }
         </ul>
       }
-    </section>
+    </div>
   `,
 })
 export class Alunos {

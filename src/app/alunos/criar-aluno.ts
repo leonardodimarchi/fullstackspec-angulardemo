@@ -7,43 +7,46 @@ import { StudentService } from '../services/student.service';
     selector: 'app-criar-aluno',
     imports: [ReactiveFormsModule, RouterLink],
     template: `
-    <section>
-      <h1>Criar aluno</h1>
+    <div class="m-3">
+
+      <h1 class="text-3xl font-bold mb-3">Criar aluno</h1>
 
       <form [formGroup]="form" (ngSubmit)="criar()">
-        <div>
-          <label for="nome">Nome</label>
-          <input id="nome" type="text" formControlName="nome" />
-        </div>
 
-        <div>
-          <label for="idade">Idade</label>
-          <input id="idade" type="number" formControlName="idade" />
-        </div>
+        <fieldset class="fieldset">
+            <legend class="fieldset-legend">Nome</legend>
+            <input type="text" class="input" placeholder="Seu nome" formControlName="nome" />
+        </fieldset>
 
-        <div>
-          <label for="curso">Curso</label>
-          <input id="curso" type="text" formControlName="curso" />
-        </div>
+        <fieldset class="fieldset">
+            <legend class="fieldset-legend">Idade</legend>
+            <input type="number" class="input" placeholder="Sua idade" formControlName="idade" />
+        </fieldset>
 
-        <div>
-          <label for="notas">Notas (separadas por vírgula)</label>
-          <input id="notas" type="text" formControlName="notas" />
-        </div>
+        <fieldset class="fieldset">
+            <legend class="fieldset-legend">Curso</legend>
+            <input type="text" class="input" placeholder="Seu curso" formControlName="curso" />
+        </fieldset>
 
-        <button type="submit" [disabled]="loading()">Criar</button>
+        <fieldset class="fieldset">
+            <legend class="fieldset-legend">Notas (separadas por vírgula)</legend>
+            <input type="text" class="input" placeholder="Ex: 7,5,8,9" formControlName="notas" />
+        </fieldset>
+
+        @if (error()) {
+            <p class="text-red-500">{{ error() }}</p>
+        }
+
+        @if (success()) {
+            <p class="text-green-500">{{ success() }}</p>
+        }
+
+        <div class="flex gap-2 mt-4">
+            <button routerLink="/alunos" class="btn btn-secondary mb-6">Voltar para lista</button>
+            <button type="submit" [disabled]="loading()" class="btn btn-primary">Criar</button>
+        </div>
       </form>
-
-      @if (error()) {
-        <p>{{ error() }}</p>
-      }
-
-      @if (success()) {
-        <p>{{ success() }}</p>
-      }
-
-      <button routerLink="/alunos">Voltar para lista</button>
-    </section>
+    </div>
   `,
 })
 export class CriarAluno {

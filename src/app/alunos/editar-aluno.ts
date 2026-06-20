@@ -7,49 +7,50 @@ import { StudentService } from '../services/student.service';
     selector: 'app-editar-aluno',
     imports: [ReactiveFormsModule, RouterLink],
     template: `
-    <section>
-      <h1>Editar aluno</h1>
+    <div class="m-3">
+      <h1 class="text-3xl font-bold mb-3">Editar aluno</h1>
 
       @if (loadingAluno()) {
-        <p>Carregando...</p>
+        <span class="loading loading-dots loading-xl"></span>
       }
 
       @if (!loadingAluno()) {
         <form [formGroup]="form" (ngSubmit)="salvar()">
-          <div>
-            <label for="nome">Nome</label>
-            <input id="nome" type="text" formControlName="nome" />
-          </div>
+            <fieldset class="fieldset">
+                <legend class="fieldset-legend">Nome</legend>
+                <input type="text" class="input" placeholder="Seu nome" formControlName="nome" />
+            </fieldset>
 
-          <div>
-            <label for="idade">Idade</label>
-            <input id="idade" type="number" formControlName="idade" />
-          </div>
+            <fieldset class="fieldset">
+                <legend class="fieldset-legend">Idade</legend>
+                <input type="number" class="input" placeholder="Sua idade" formControlName="idade" />
+            </fieldset>
 
-          <div>
-            <label for="curso">Curso</label>
-            <input id="curso" type="text" formControlName="curso" />
-          </div>
+            <fieldset class="fieldset">
+                <legend class="fieldset-legend">Curso</legend>
+                <input type="text" class="input" placeholder="Seu curso" formControlName="curso" />
+            </fieldset>
 
-          <div>
-            <label for="notas">Notas (separadas por vírgula)</label>
-            <input id="notas" type="text" formControlName="notas" />
-          </div>
+            <fieldset class="fieldset">
+                <legend class="fieldset-legend">Notas (separadas por vírgula)</legend>
+                <input type="text" class="input" placeholder="Ex: 7,5,8,9" formControlName="notas" />
+            </fieldset>
 
-          <button type="submit" [disabled]="saving()">Salvar</button>
+            @if (error()) {
+                <p class="text-red-500">{{ error() }}</p>
+            }
+
+            @if (success()) {
+                <p class="text-green-500">{{ success() }}</p>
+            }
+
+            <div class="flex gap-2 mt-4">
+                <button routerLink="/alunos" class="btn btn-secondary mb-6">Voltar para lista</button>
+                <button type="submit" [disabled]="saving()" class="btn btn-primary">Salvar</button>
+            </div>
         </form>
       }
-
-      @if (error()) {
-        <p>{{ error() }}</p>
-      }
-
-      @if (success()) {
-        <p>{{ success() }}</p>
-      }
-
-      <button routerLink="/alunos">Voltar para lista</button>
-    </section>
+    </div>
   `,
 })
 export class EditarAluno {

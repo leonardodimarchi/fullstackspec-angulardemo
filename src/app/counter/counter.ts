@@ -3,19 +3,19 @@ import { Component, computed, signal } from '@angular/core';
 @Component({
     selector: 'app-counter',
     template: `
-    <section>
-      <h1>Contador</h1>
-      <p>Este exemplo demonstra o data binding em funcionamento.</p>
+    <div class="m-3">
+      <h1 class="text-3xl font-bold mb-3">Contador</h1>
+      <p class="text-lg">Este exemplo demonstra o data binding em funcionamento.</p>
 
-      <p>Valor atual: <strong>{{ contador() }}</strong></p>
-      <p>Dobro do valor: <strong>{{ dobro() }}</strong></p>
+      <p class="text-md">Valor atual: <strong>{{ contador() }}</strong></p>
+      <p class="text-md">Dobro do valor: <strong>{{ dobro() }}</strong></p>
 
-      <div>
-        <button type="button" (click)="diminuir()">Diminuir</button>
-        <button type="button" (click)="aumentar()">Aumentar</button>
-        <button type="button" (click)="zerar()">Zerar</button>
+      <div class="flex gap-2 mt-3">
+        <button class="btn btn-secondary" type="button" (click)="diminuir()">Diminuir</button>
+        <button class="btn btn-primary" type="button" (click)="aumentar()">Aumentar</button>
+        <button class="btn btn-danger" type="button" (click)="zerar()">Zerar</button>
       </div>
-    </section>
+    </div>
   `,
 })
 export class Counter {
