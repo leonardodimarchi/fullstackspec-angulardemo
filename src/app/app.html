@@ -1,0 +1,13 @@
+<div class="app-shell">
+    <nav class="main-nav">
+        <ul>
+            <li><a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Home</a></li>
+            <li><a routerLink="/alunos" routerLinkActive="active">Alunos</a></li>
+            <li><a routerLink="/login" routerLinkActive="active">Login</a></li>
+            <li><a routerLink="/about" routerLinkActive="active">Sobre</a></li>
+            <li><a routerLink="/contador" routerLinkActive="active">Contador</a></li>
+        </ul>
+    </nav>
+
+    <router-outlet />
+</div>
